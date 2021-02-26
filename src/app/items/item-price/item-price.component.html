@@ -1,0 +1,14 @@
+<mat-card *ngFor="let item of priceGroups">
+    <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>{{item.Name}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-card *ngFor="let group of item.prices">
+            <mat-card-content>
+                <p>{{group.PriceType}}</p>
+                <p>{{group.PriceIncludingTax}}</p>
+            </mat-card-content>
+        </mat-card>
+    </mat-card-content>
+</mat-card>

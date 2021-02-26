@@ -1,0 +1,44 @@
+<mat-toolbar color="default">
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <span>Task Management</span>
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Search" #searchInput>
+    </mat-form-field>
+    <span class="example-spacer"></span>
+    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+        <mat-icon>favorite</mat-icon>
+    </button>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+        <mat-icon>share</mat-icon>
+    </button>
+</mat-toolbar>
+<section class="example-section">
+    <mat-checkbox class="example-margin" [(ngModel)]="overDueTasks" (change)="checkboxChange()">Overdue Tasks
+    </mat-checkbox>
+    <mat-checkbox class="example-margin" [(ngModel)]="pendingTasks" (change)="checkboxChange()">Pending Tasks
+    </mat-checkbox>
+    <mat-checkbox class="example-margin" [(ngModel)]="completedTasks" (change)="checkboxChange()">Completed Tasks
+    </mat-checkbox>
+</section>
+<mat-accordion *ngIf="tasks$ |  async as tasks">
+    <mat-expansion-panel *ngFor="let item of tasks">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <img src="../../assets/images/account_circle-24px.svg" height="50" width="50"
+                    [ngStyle]="{'color:green': item.attributes.taskTypeID === 2}">
+                <p> {{item.attributes.name}}</p>
+                <p> {{item.status}} </p>
+            </mat-panel-title>
+            <mat-panel-description>
+                <div>
+                    <div>{{item.attributes.date | date}}</div>
+                    <div>Assign</div>
+                    <div>{{item.attributes.reference}}</div>
+                </div>
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <app-task-detail [task]="item"></app-task-detail>
+    </mat-expansion-panel>
+</mat-accordion>
